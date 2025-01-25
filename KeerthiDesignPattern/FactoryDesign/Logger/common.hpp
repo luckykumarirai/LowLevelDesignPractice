@@ -4,7 +4,7 @@
 
 using namespace std;
 
-enum class LogLevel {
+enum class LoggerType {
     DEBUG,
     INFO,
     ERROR

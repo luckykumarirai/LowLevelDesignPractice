@@ -1,5 +1,5 @@
-#ifndef errorLogger_hpp
-#define errorLogger_hpp
+#ifndef infoLogger_hpp
+#define infoLogger_hpp
 #include "ilogger.hpp"
 class infoLogger : public ILogger
 {
