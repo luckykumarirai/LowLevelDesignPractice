@@ -1,5 +1,5 @@
 #include<iostream>
-using namaspace std;
+using namespace std;
 
 //A pure virtual function is a special kind of virtual function in C++ that is declared in a base class but has no implementation
 // Classes containing pure virtual functions are called abstract classes, and they cannot be instantiated directly.
@@ -47,8 +47,8 @@ class WinTextBox : public ITextBox{
 
 class IFactory{
     public:
-    virtual IButton * CraeteButton () = 0;
-    virtual ITextBox * CraeteTextBox () = 0;
+    virtual IButton * CreateButton () = 0;
+    virtual ITextBox * CreateTextBox () = 0;
 };
 
 class MacFactory : public IFactory{
@@ -76,14 +76,16 @@ class GUIAbstractFactory{
 public:
     static IFactory * CreateFactory(string osType)
     {
+        IFactory * fact = nullptr;
         if(osType ==" window")
         {
-            return new WinFactory();
+            fact= new WinFactory();
         }
         else if( osType == "Mac")
         {
-            return new MacFactory();
+            fact=new MacFactory();
         }
+        return fact;
     }
 };
 
@@ -96,12 +98,12 @@ int main()
      string osType;
      cin >>osType;
 
-     IFactory * fact = GUIAbstractFactory:: CreateFatory(osType);
+     IFactory *fact = GUIAbstractFactory:: CreateFactory(osType);
 
-     IButton *button  = fact->CraeteButton();
-     button -> pres();
+     IButton *button  = fact ->CreateButton();
+     button -> press();
 
-     ITextBox * textbox = fact ->CareteTextBox();
+     ITextBox * textbox = fact ->CreateTextBox();
      textbox->showText();
 ;     return 0;
 }
