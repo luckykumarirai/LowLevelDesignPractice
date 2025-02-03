@@ -21,4 +21,14 @@ class AbstractFactory{
     }
 };
 
+// Factory -> car -> called car factory
+
 #endif
+
+
+// Vehicle 
+//car bike truck 
+
+//factory 
+// car -> vehicle 
+
