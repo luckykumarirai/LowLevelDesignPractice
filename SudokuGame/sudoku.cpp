@@ -74,7 +74,7 @@ public:
             {
                 return false;
             }
-            if(board[3*(row/3)+i/3][3*(col/3)+i%3].getValue()==value)
+            if(board[3*(row/3)+i%3][3*(col/3)+i%3].getValue()==value)
             {
                 return false;
             }
