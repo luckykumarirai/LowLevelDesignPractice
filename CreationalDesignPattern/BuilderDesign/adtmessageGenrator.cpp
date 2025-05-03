@@ -16,6 +16,7 @@ class ADTmessase{
 
 class ADTmessageBuilder{
     public:
+        virtual void reset()=0;
         virtual void buildMsh()=0;
         virtual void buildPv1()=0;
         virtual void buildEvn()=0;
@@ -29,7 +30,13 @@ class ADTmessageBuilder{
 class ConcreateADTmessageBuilder : public ADTmessageBuilder{
     public:
         ADTmessase* message;
-        ConcreateADTmessageBuilder(){
+
+        ConcreateADTmessageBuilder() : message(nullptr) {}
+
+        void reset(){
+            if (message != nullptr) {
+            delete message;
+            }
             message = new ADTmessase();
         }
         void buildMsh(){
@@ -59,6 +66,7 @@ class ADTmessageDirector{
     ADTmessageBuilder* builder;
     ADTmessageDirector(ADTmessageBuilder* builder) : builder(builder) {}    
     void constructFullMessage(){
+        builder->reset();
         builder->buildMsh();
         builder->buildPv1();
         builder->buildEvn();
@@ -66,33 +74,60 @@ class ADTmessageDirector{
         builder->buildPv2();
     }
     void constructMessage(){
+        builder->reset();
         builder->buildMsh();
         builder->buildPv1();
     }
 };
 
 int main(){
-    ConcreateADTmessageBuilder* builder = new ConcreateADTmessageBuilder();
+    // ConcreateADTmessageBuilder* builder = new ConcreateADTmessageBuilder();
 
-    ADTmessageDirector* director = new ADTmessageDirector(builder);
-    director->constructMessage();
+    // ADTmessageDirector* director = new ADTmessageDirector(builder);
+    // director->constructFullMessage();
+    //  cout << "For full message" << endl;
+    // ADTmessase* message = builder->getMessage();
+    // cout<<message->msh<<endl;
+    // cout<<message->pv1<<endl;
+    // cout<<message->evn<<endl;
+    // cout<<message->pid<<endl;
+    // cout<<message->pv2<<endl;
 
-    ADTmessase* message = builder->getMessage();
+
+    // // for full message
+    // cout << "For partial message" << endl;
+    // ConcreateADTmessageBuilder* builder2 = new ConcreateADTmessageBuilder();
+    // ADTmessageDirector* director2 = new ADTmessageDirector(builder2);
+    // director2->constructMessage();
+    // ADTmessase* message2 = builder2->getMessage();
+    // cout<<message2->msh<<endl;
+    // cout<<message2->pv1<<endl;
+    // cout<<message2->evn<<endl;
+    // cout<<message2->pid<<endl;
+    // cout<<message2->pv2<<endl;
+
+
+
+
+
+
+    // alternative using same builder
+
+    ConcreateADTmessageBuilder builder;
+
+    ADTmessageDirector director(&builder);
+    director.constructFullMessage();
+    ADTmessase* message = builder.getMessage();
     cout<<message->msh<<endl;
     cout<<message->pv1<<endl;
     cout<<message->evn<<endl;
     cout<<message->pid<<endl;
-    cout<<message->pv2<<endl;
+    cout<<message->pv2<<endl;   
 
-
-    // for full message
-
-    director->constructFullMessage();
-    message = builder->getMessage();
+    director.constructMessage();
+    message = builder.getMessage();
     cout<<message->msh<<endl;
     cout<<message->pv1<<endl;
-    cout<<message->evn<<endl;
-    cout<<message->pid<<endl;
-    cout<<message->pv2<<endl;
+
     return 0;
 }
