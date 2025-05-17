@@ -4,19 +4,33 @@ using namespace std;
 
 class NetworkDevice {
 public:
+    // use const - This method will not modify the internal state of the object.
+    // promising that clone() is a read-only operation — it doesn’t change the current object.
     virtual NetworkDevice* clone() const = 0;
     virtual void display() const = 0;
     virtual void update(string newName) = 0; // Update the device's name
 };
 
 class Router : public NetworkDevice {
+private:
+    string name;
+    string ip;
+    string securityPolicy;
 public:
     Router(string name, string ip, string securityPolicy)
         : name(move(name)), ip(move(ip)), securityPolicy(move(securityPolicy)) {}
 
+    //*this refers to the current object (the one calling clone()).
+    //calls the copy constructor to create a new object that's a copy of the current one.
+    //new allocates that object on the heap.
     NetworkDevice* clone() const override {
+        // Clone returns deep copy
+        // alter native of last line to return deep copy of object 
+        //ConcretePrototype2 copy = *this;              // Copy constructor is called
+        //return new ConcretePrototype2(copy);  	
         return new Router(*this);
     }
+
 
     void display() const override {
         cout << "Router - Name: " << name << ", IP: " << ip << ", Security Policy: " << securityPolicy << endl;
@@ -25,14 +39,12 @@ public:
     void update(string newName) override {
         name = move(newName);
     }
-
-private:
-    string name;
-    string ip;
-    string securityPolicy;
 };
 
 class Switch : public NetworkDevice {
+private:
+    string name;
+    string protocol;
 public:
     Switch(string name, string protocol)
         : name(move(name)), protocol(move(protocol)) {}
@@ -49,9 +61,6 @@ public:
         name = move(newName);
     }
 
-private:
-    string name;
-    string protocol;
 };
 
 int main() {
