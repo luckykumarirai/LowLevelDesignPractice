@@ -1,0 +1,21 @@
+# Ignore executables
+*.exe
+*.out
+*.o
+*.obj
+
+# Ignore libraries
+*.a
+*.so
+*.dll
+*.lib
+
+# Ignore build directories
+/build/
+/bin/
+/dist/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.user

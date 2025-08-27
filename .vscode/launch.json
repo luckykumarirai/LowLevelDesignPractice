@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/lucky.kumari/OneDrive - Providence St. Joseph Health/Desktop/Target/MyPractice",
-      "program": "c:/Users/lucky.kumari/OneDrive - Providence St. Joseph Health/Desktop/Target/MyPractice/build/Debug/outDebug",
+      "cwd": "c:/Users/Lucky Kumari/Documents/Projects/LowLevelDesignPractice/googledocs",
+      "program": "c:/Users/Lucky Kumari/Documents/Projects/LowLevelDesignPractice/googledocs/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
